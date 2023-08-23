@@ -1,4 +1,18 @@
+import { useEffect } from "react"
+import { fetchCategories } from "../features/products/productsSlice"
+import { useDispatch, useSelector } from "react-redux"
+
 function Categories() {
+  const dispatch = useDispatch()
+  const categories = useSelector(state => state.products.categories.items)
+  const categoriesStatus = useSelector(state => state.products.categories.status)
+
+  useEffect(() => {
+    if (categoriesStatus === "idle") {
+      dispatch(fetchCategories())
+    }
+  }, [categoriesStatus, dispatch])
+
   return (
     <div className="bg-gray-100 p-4">
       <div className="container mx-auto text-center">
