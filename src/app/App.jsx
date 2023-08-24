@@ -1,5 +1,5 @@
-import Categories from "../common/Categories"
 import Header from "../common/Header"
+import Categories from "../features/products/Categories"
 import "./app.scss"
 
 function App() {

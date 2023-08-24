@@ -1,5 +1,5 @@
 import { useEffect } from "react"
-import { fetchCategories } from "../features/products/productsSlice"
+import { fetchCategories } from "./productsSlice"
 import { useDispatch, useSelector } from "react-redux"
 
 function Categories() {
