@@ -1,14 +1,13 @@
 import Header from "../common/Header"
-import Categories from "../features/products/Categories"
-import Products from "../features/products/Products"
+import { RouterProvider } from "react-router-dom"
+import { router } from "../router"
 import "./app.scss"
 
 function App() {
   return (
     <>
       <Header />
-      <Categories />
-      <Products />
+      <RouterProvider router={router} />
     </>
   )
 }
