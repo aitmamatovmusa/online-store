@@ -1,8 +1,9 @@
 import { useEffect } from "react"
-import Spinner from "./../../common/Spinner"
 import { useDispatch, useSelector } from "react-redux"
 import { fetchProducts } from "./productsSlice"
+import Spinner from "./../../common/Spinner"
 import { STATUS } from "../../constants/status"
+import { addToCart } from "../cart/cartSlice"
 
 function Products() {
   const dispatch = useDispatch()
@@ -15,6 +16,10 @@ function Products() {
       dispatch(fetchProducts())
     }
   }, [status, dispatch])
+
+  function addProductToCart(product) {
+    dispatch(addToCart(product))
+  }
 
   return (
     <div className="bg-gray-100 p-4">
@@ -50,7 +55,10 @@ function Products() {
                   </svg>
                   <span className="ml-1">{product.rating.rate} ({product.rating.count})</span>
                 </div>
-                <button className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600 focus:outline-none">
+                <button
+                  className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600 focus:outline-none"
+                  onClick={() => addProductToCart(product)}
+                >
                   Add to Cart
                 </button>
               </div>
