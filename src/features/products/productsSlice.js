@@ -13,8 +13,8 @@ export const fetchProducts = createAsyncThunk(
 export const fetchCategories = createAsyncThunk(
   "products/fetchCategories",
   async () => {
-    const { data: categories } = await httpService("products/categories");
-    return categories;
+    const { data } = await httpService("products/categories");
+    return data;
   }
 );
 
@@ -42,7 +42,7 @@ export const productsSlice = createSlice({
         state.categories.status = STATUS.ERROR;
       })
       .addCase(fetchProducts.pending, (state) => {
-        state.status = STATUS.pending;
+        state.status = STATUS.LOADING;
       })
       .addCase(fetchProducts.fulfilled, (state, action) => {
         state.status = STATUS.FULFILLED;
