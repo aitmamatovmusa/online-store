@@ -1,6 +1,7 @@
 import { useEffect } from "react"
 import { fetchCategories } from "./productsSlice"
 import { useDispatch, useSelector } from "react-redux"
+import { STATUS } from "../../constants/status"
 
 function Categories() {
   const dispatch = useDispatch()
@@ -8,7 +9,7 @@ function Categories() {
   const categoriesStatus = useSelector(state => state.products.categories.status)
 
   useEffect(() => {
-    if (categoriesStatus === "idle") {
+    if (categoriesStatus === STATUS.IDLE) {
       dispatch(fetchCategories())
     }
   }, [categoriesStatus, dispatch])
