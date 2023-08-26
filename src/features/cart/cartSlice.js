@@ -12,7 +12,7 @@ export const cartSlice = createSlice({
       const product = action.payload;
       const productId = product.id;
       const isProductInCart = state.items.some(({ id }) => id === productId);
-      if (isProductInCart) state.items.push(product);
+      if (!isProductInCart) state.items.push(product);
     },
   },
 });

@@ -17,7 +17,7 @@ function Categories() {
   }, [categoriesStatus, dispatch])
 
   return (
-    <div className="bg-gray-100 p-4">
+    <div className="bg-gray-100 p-8">
       <div className="container mx-auto text-center">
         <h2 className="text-2xl font-semibold mb-4">Categories</h2>
         {
