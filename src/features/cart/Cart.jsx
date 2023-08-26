@@ -1,5 +1,3 @@
-import React from "react";
-
 function Cart() {
   return (
     <div className="bg-gray-100 min-h-screen p-8">

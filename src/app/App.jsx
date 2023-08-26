@@ -1,13 +1,18 @@
+import { Route, Routes } from "react-router-dom"
+import Home from "../features/products/Home"
+import { paths } from "../router"
 import Header from "../common/Header"
-import { RouterProvider } from "react-router-dom"
-import { router } from "../router"
+import Cart from "../features/cart/Cart"
 import "./app.scss"
 
 function App() {
   return (
     <>
       <Header />
-      <RouterProvider router={router} />
+      <Routes>
+        <Route path={paths.home} element={<Home />} />
+        <Route path={paths.cart} element={<Cart />} />
+      </Routes>
     </>
   )
 }
