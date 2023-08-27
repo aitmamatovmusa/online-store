@@ -28,7 +28,16 @@ export const productsSlice = createSlice({
       items: [],
     },
   },
-  reducers: {},
+  reducers: {
+    setAddedToCart(state, action) {
+      const productId = action.payload;
+      state.items.forEach((product) => {
+        if (product.id === productId) {
+          product.isAddedToCart = true;
+        }
+      });
+    },
+  },
   extraReducers(builder) {
     builder
       .addCase(fetchCategories.pending, (state) => {
@@ -46,7 +55,10 @@ export const productsSlice = createSlice({
       })
       .addCase(fetchProducts.fulfilled, (state, action) => {
         state.status = STATUS.FULFILLED;
-        state.items = action.payload;
+        state.items = action.payload.map((product) => ({
+          ...product,
+          isAddedToCart: false,
+        }));
       })
       .addCase(fetchProducts.rejected, (state) => {
         state.status = STATUS.ERROR;
@@ -54,4 +66,5 @@ export const productsSlice = createSlice({
   },
 });
 
+export const { setAddedToCart } = productsSlice.actions;
 export default productsSlice.reducer;

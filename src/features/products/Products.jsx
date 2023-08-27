@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { fetchProducts } from "./productsSlice"
+import { fetchProducts, setAddedToCart } from "./productsSlice"
 import Spinner from "./../../common/Spinner"
 import { STATUS } from "../../constants/status"
 import { addToCart } from "../cart/cartSlice"
@@ -18,7 +18,10 @@ function Products() {
   }, [status, dispatch])
 
   function addProductToCart(product) {
-    dispatch(addToCart(product))
+    if (!product.isAddedToCart) {
+      dispatch(addToCart(product))
+      dispatch(setAddedToCart(product.id))
+    }
   }
 
   return (
@@ -56,10 +59,10 @@ function Products() {
                   <span className="ml-1">{product.rating.rate} ({product.rating.count})</span>
                 </div>
                 <button
-                  className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600 focus:outline-none"
+                  className={`px-4 py-2 text-white rounded focus:outline-none ${product.isAddedToCart ? "bg-green-500 hover:bg-green-600" : "bg-blue-500 hover:bg-blue-600"} `}
                   onClick={() => addProductToCart(product)}
                 >
-                  Add to Cart
+                  Add{product.isAddedToCart ? "ed" : ""} to Cart
                 </button>
               </div>
             </div>
