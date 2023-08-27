@@ -1,6 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { STATUS } from "../../constants/status";
 
+function formatNumber(number, decimalPlaces = 2) {
+  return +number.toFixed(decimalPlaces);
+}
+
 export const cartSlice = createSlice({
   name: "cart",
   initialState: {
@@ -18,10 +22,10 @@ export const cartSlice = createSlice({
           id: productId,
           image: product.image,
           title: product.title,
-          price: product.price,
+          price: formatNumber(product.price),
           quantity: 1,
         });
-        state.totalPrice += product.price;
+        state.totalPrice = formatNumber(state.totalPrice + product.price);
       }
     },
     deleteFromCart(state, action) {
@@ -32,7 +36,7 @@ export const cartSlice = createSlice({
       if (removedProduct) {
         const totalPrice = removedProduct.price * removedProduct.quantity;
         state.items = state.items.filter((product) => product.id !== productId);
-        state.totalPrice -= totalPrice;
+        state.totalPrice = formatNumber(state.totalPrice - totalPrice);
       }
     },
     clearCart(state) {
@@ -43,7 +47,7 @@ export const cartSlice = createSlice({
       const productId = action.payload;
       state.items = state.items.map((product) => {
         if (product.id === productId) {
-          state.totalPrice += product.price * 1;
+          state.totalPrice = formatNumber(product.price * 1 + state.totalPrice);
           return {
             ...product,
             quantity: ++product.quantity,
@@ -56,7 +60,8 @@ export const cartSlice = createSlice({
       const productId = action.payload;
       state.items = state.items.map((product) => {
         if (product.id === productId && product.quantity > 1) {
-          state.totalPrice -= product.price * 1;
+          console.log(formatNumber(state.totalPrice - product.price * 1));
+          state.totalPrice = formatNumber(state.totalPrice - product.price * 1);
           return {
             ...product,
             quantity: --product.quantity,
