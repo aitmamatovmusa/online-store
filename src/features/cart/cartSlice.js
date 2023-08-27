@@ -6,13 +6,23 @@ export const cartSlice = createSlice({
   initialState: {
     items: [],
     status: STATUS.IDLE,
+    totalPrice: 0,
   },
   reducers: {
     addToCart(state, action) {
       const product = action.payload;
       const productId = product.id;
       const isProductInCart = state.items.some(({ id }) => id === productId);
-      if (!isProductInCart) state.items.push(product);
+      if (!isProductInCart) {
+        state.items.push({
+          id: productId,
+          image: product.image,
+          title: product.title,
+          price: product.price,
+          quantity: 1,
+        });
+        state.totalPrice += product.price;
+      }
     },
   },
 });
