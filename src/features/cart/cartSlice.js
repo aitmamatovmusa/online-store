@@ -28,8 +28,33 @@ export const cartSlice = createSlice({
       state.items = [];
       state.totalPrice = 0;
     },
+    incrementQuantity(state, action) {
+      const productId = action.payload;
+      state.items = state.items.map((product) => {
+        if (product.id === productId) {
+          return {
+            ...product,
+            quantity: ++product.quantity,
+          };
+        }
+        return product;
+      });
+    },
+    decrementQuantity(state, action) {
+      const productId = action.payload;
+      state.items = state.items.map((product) => {
+        if (product.id === productId && product.quantity > 1) {
+          return {
+            ...product,
+            quantity: --product.quantity,
+          };
+        }
+        return product;
+      });
+    },
   },
 });
 
-export const { addToCart, clearCart } = cartSlice.actions;
+export const { addToCart, clearCart, incrementQuantity, decrementQuantity } =
+  cartSlice.actions;
 export default cartSlice.reducer;
