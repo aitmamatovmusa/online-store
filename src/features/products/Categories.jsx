@@ -23,9 +23,9 @@ function Categories() {
         {
           isLoading ? <Spinner center /> : <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {categories.map((category, idx) => {
-              return <a key={idx} href="#" className="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition duration-300">
+              return <div key={idx} className="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition duration-300">
                 <h3 className="text-lg font-semibold">{category}</h3>
-              </a>
+              </div>
             })}
           </div>
         }
