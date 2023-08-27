@@ -1,5 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
-import { clearCart, decrementQuantity, incrementQuantity } from "./cartSlice";
+import {
+  clearCart,
+  decrementQuantity,
+  incrementQuantity,
+  deleteFromCart
+} from "./cartSlice";
 
 function Cart() {
   const dispatch = useDispatch()
@@ -16,6 +21,10 @@ function Cart() {
 
   function handleDecrementQuantity(id) {
     dispatch(decrementQuantity(id))
+  }
+
+  function handleDeleteProduct(id) {
+    dispatch(deleteFromCart(id))
   }
 
   return (
@@ -56,6 +65,7 @@ function Cart() {
                     </button>
                     <button
                       className="p-2 bg-red-500 text-white rounded-md ml-4 focus:outline-none"
+                      onClick={() => handleDeleteProduct(cartProduct.id)}
                     >
                       Remove
                     </button>
