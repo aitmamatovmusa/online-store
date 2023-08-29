@@ -30,11 +30,18 @@ export const productsSlice = createSlice({
   },
   reducers: {
     setAddedToCart(state, action) {
-      const productId = action.payload;
+      const productId = action.payload.id;
+      const productIsAdded = action.payload.isAdded;
+
       state.items.forEach((product) => {
         if (product.id === productId) {
-          product.isAddedToCart = true;
+          product.isAddedToCart = productIsAdded;
         }
+      });
+    },
+    resetAddedToCart(state) {
+      state.items.forEach((product) => {
+        product.isAddedToCart = false;
       });
     },
   },
@@ -66,5 +73,5 @@ export const productsSlice = createSlice({
   },
 });
 
-export const { setAddedToCart } = productsSlice.actions;
+export const { setAddedToCart, resetAddedToCart } = productsSlice.actions;
 export default productsSlice.reducer;

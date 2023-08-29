@@ -5,6 +5,7 @@ import {
   incrementQuantity,
   deleteFromCart
 } from "./cartSlice";
+import { resetAddedToCart, setAddedToCart } from "../products/productsSlice";
 
 function Cart() {
   const dispatch = useDispatch()
@@ -13,6 +14,7 @@ function Cart() {
 
   function handleClearCart() {
     dispatch(clearCart())
+    dispatch(resetAddedToCart())
   }
 
   function handleIncrementQuantity(id) {
@@ -24,7 +26,12 @@ function Cart() {
   }
 
   function handleDeleteProduct(id) {
+    const productDetails = {
+      id,
+      isAdded: false
+    }
     dispatch(deleteFromCart(id))
+    dispatch(setAddedToCart(productDetails))
   }
 
   return (

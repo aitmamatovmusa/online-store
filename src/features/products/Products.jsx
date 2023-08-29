@@ -19,8 +19,12 @@ function Products() {
 
   function addProductToCart(product) {
     if (!product.isAddedToCart) {
+      const productDetails = {
+        id: product.id,
+        isAdded: true
+      }
       dispatch(addToCart(product))
-      dispatch(setAddedToCart(product.id))
+      dispatch(setAddedToCart(productDetails))
     }
   }
 
@@ -62,7 +66,7 @@ function Products() {
                   className={`px-4 py-2 text-white rounded focus:outline-none ${product.isAddedToCart ? "bg-green-500 hover:bg-green-600" : "bg-blue-500 hover:bg-blue-600"} `}
                   onClick={() => addProductToCart(product)}
                 >
-                  Add{product.isAddedToCart ? "ed" : ""} to Cart
+                  Add{product.isAddedToCart ? "ed" : ""} to cart
                 </button>
               </div>
             </div>
